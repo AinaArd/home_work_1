@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/email"
+        android:textSize="17sp"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePicEdit" />
 
     <EditText
         android:id="@+id/passwordEdit"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
+        android:textSize="17sp"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumberEdit"
         app:layout_constraintHorizontal_bias="0.5"
@@ -38,22 +40,23 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/phone_number"
+        android:textSize="17sp"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
+        tools:ignore="TextFields" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="90dp"
-        android:layout_height="68dp"
-        android:layout_marginBottom="24dp"
+    <ImageButton
+        android:id="@+id/profilePicEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/emailEdit"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@android:drawable/btn_star"
+        tools:layout_editor_absoluteX="164dp" />
 </android.support.constraint.ConstraintLayout>
