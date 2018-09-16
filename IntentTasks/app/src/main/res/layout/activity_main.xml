@@ -12,8 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="19sp"
-        android:textColorHint="#ffffff"
-
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="19sp"
-        android:textColorHint="#ffffff"
-
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -37,8 +35,7 @@
         android:id="@+id/phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-
-        android:textColorHint="#ffffff"
+        android:textColor="#ffffff"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -73,14 +70,14 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
     <Button
-        android:id="@+id/googleButton"
+        android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="28dp"
         android:background="#ffffff"
         android:padding="7dp"
-        android:text="@string/google"
+        android:text="Send"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,5 +1,6 @@
 package com.example.intenttasks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,19 +32,17 @@ public class Main2Activity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         cancelButton = findViewById(R.id.cancelButton);
 
-        final String filledEmail = emailEdit.getText().toString();
-        final String filledName = nameEdit.getText().toString();
-        final String filledNumber = phoneNumberEdit.getText().toString();
+
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPost = new Intent(Main2Activity.this, MainActivity.class);
-                intentPost.putExtra("email", filledEmail);
-                intentPost.putExtra("name", filledName);
-                intentPost.putExtra("number", filledNumber);
-
-                startActivity(intentPost);
+                Intent intentPost = new Intent();
+                intentPost.putExtra("email", emailEdit.getText().toString());
+                intentPost.putExtra("name", nameEdit.getText().toString());
+                intentPost.putExtra("number", phoneNumberEdit.getText().toString());
+                setResult(RESULT_OK,intentPost);
+                finish();
             }
         });
 
@@ -51,21 +50,20 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent cancelIntent = new Intent(Main2Activity.this,MainActivity.class);
-                Toast toast = Toast.makeText(getApplicationContext(),"Cancel the edit",Toast.LENGTH_LONG);
-                toast.show();
+
                 startActivity(cancelIntent);
 
             }
         });
 
-        profilePicEdit.setOnClickListener(new View.OnClickListener() {
+      /*  profilePicEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent changePhotoIntent = new Intent(Intent.ACTION_PICK);
                 changePhotoIntent.setType("image/*");
                 startActivity(changePhotoIntent);
             }
-        });
+        });*/
 
     }
 }

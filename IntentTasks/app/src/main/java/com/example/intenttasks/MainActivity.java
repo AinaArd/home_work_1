@@ -17,47 +17,59 @@ public class MainActivity extends AppCompatActivity {
     TextView phoneNumber;
     ImageView profilePic;
     Button editButton;
-    Button googleButton;
+    Button sendButton;
 
-    private static final int REQUEST_ID_URI = 1;
+    private static final int REQUEST_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        email = findViewById(R.id.email);
+        name = findViewById(R.id.name);
+        phoneNumber = findViewById(R.id.phoneNumber);
 
         profilePic = findViewById(R.id.profilePic);
         editButton = findViewById(R.id.buttonEdit);
-        googleButton = findViewById(R.id.googleButton);
+        sendButton = findViewById(R.id.sendButton);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                String filledEmail = getIntent().getStringExtra("email");
-                String filledName = getIntent().getStringExtra("name");
-                String filledNumber = getIntent().getStringExtra("number");
-                if (filledEmail != null && filledName != null && filledNumber != null) {
-                    email = findViewById(R.id.email);
-                    name = findViewById(R.id.name);
-                    phoneNumber = findViewById(R.id.phoneNumber);
-                    email.setText(filledEmail);
-                    name.setText(filledName);
-                    phoneNumber.setText(filledNumber);
-                }
-                startActivity(intent);
+
+                startActivityForResult(intent, 0);
             }
         });
 
-        googleButton.setOnClickListener(new View.OnClickListener() {
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://google.com";
-                Intent intentGoogle = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivityForResult(intentGoogle,REQUEST_ID_URI);
+                String send = getIntent().getStringExtra("email") +
+                        getIntent().getStringExtra("name") +
+                        getIntent().getStringExtra("number");
+
+                Intent intentSend = new Intent(Intent.ACTION_SEND);
+                intentSend.putExtra(Intent.EXTRA_TEXT, send);
+                intentSend.setType("text/plain");
+                startActivity(Intent.createChooser(intentSend, "Share text"));
+
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String filledEmail = data.getStringExtra("email");
+        String filledName = data.getStringExtra("name");
+        String filledNumber = data.getStringExtra("number");
+
+        email.setText(filledEmail);
+        name.setText(filledName);
+        phoneNumber.setText(filledNumber);
 
     }
 }
