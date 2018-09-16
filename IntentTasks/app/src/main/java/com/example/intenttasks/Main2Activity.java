@@ -1,14 +1,13 @@
 package com.example.intenttasks;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -16,7 +15,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView emailEdit;
     TextView nameEdit;
     TextView phoneNumberEdit;
-    ImageButton profilePicEdit;
+    ImageView profilePicEdit;
     Button confirmButton;
     Button cancelButton;
 
@@ -50,20 +49,9 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent cancelIntent = new Intent(Main2Activity.this,MainActivity.class);
-
                 startActivity(cancelIntent);
-
             }
         });
-
-      /*  profilePicEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent changePhotoIntent = new Intent(Intent.ACTION_PICK);
-                changePhotoIntent.setType("image/*");
-                startActivity(changePhotoIntent);
-            }
-        });*/
 
     }
 }

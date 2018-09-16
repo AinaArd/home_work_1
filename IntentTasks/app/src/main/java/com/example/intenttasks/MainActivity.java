@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-
                 startActivityForResult(intent, 0);
             }
         });
@@ -47,15 +46,12 @@ public class MainActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String send = getIntent().getStringExtra("email") +
-                        getIntent().getStringExtra("name") +
-                        getIntent().getStringExtra("number");
+                String send =  email.getText().toString() + name.getText().toString() + phoneNumber.getText().toString();
 
                 Intent intentSend = new Intent(Intent.ACTION_SEND);
                 intentSend.putExtra(Intent.EXTRA_TEXT, send);
                 intentSend.setType("text/plain");
                 startActivity(Intent.createChooser(intentSend, "Share text"));
-
             }
         });
 
