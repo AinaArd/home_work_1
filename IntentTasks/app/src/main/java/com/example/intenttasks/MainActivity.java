@@ -1,13 +1,16 @@
 package com.example.intenttasks;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,12 +49,11 @@ public class MainActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String send =  email.getText().toString() + name.getText().toString() + phoneNumber.getText().toString();
-
+                String send = email.getText().toString() + name.getText().toString() + phoneNumber.getText().toString();
                 Intent intentSend = new Intent(Intent.ACTION_SEND);
                 intentSend.putExtra(Intent.EXTRA_TEXT, send);
                 intentSend.setType("text/plain");
-                startActivity(Intent.createChooser(intentSend, "Share text"));
+                startActivityForResult(intentSend, REQUEST_ID);
             }
         });
 
@@ -59,13 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String filledEmail = data.getStringExtra("email");
-        String filledName = data.getStringExtra("name");
-        String filledNumber = data.getStringExtra("number");
 
-        email.setText(filledEmail);
-        name.setText(filledName);
-        phoneNumber.setText(filledNumber);
+        if (requestCode == 0) {
+            if (data != null) {
+                String filledEmail = data.getStringExtra("email");
+                String filledName = data.getStringExtra("name");
+                String filledNumber = data.getStringExtra("number");
 
+                email.setText(filledEmail);
+                name.setText(filledName);
+                phoneNumber.setText(filledNumber);
+            }
+
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this, "You have cancelled", Toast.LENGTH_LONG).show();
+        }
     }
 }

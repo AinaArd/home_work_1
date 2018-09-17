@@ -1,5 +1,6 @@
 package com.example.intenttasks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class Main2Activity extends AppCompatActivity {
         emailEdit = findViewById(R.id.emailEdit);
         nameEdit = findViewById(R.id.nameEdit);
         phoneNumberEdit = findViewById(R.id.phoneNumberEdit);
-        profilePicEdit = findViewById(R.id.profilePicEdit);
+        profilePicEdit = findViewById(R.id.profilePic);
         confirmButton = findViewById(R.id.confirmButton);
         cancelButton = findViewById(R.id.cancelButton);
 
@@ -48,8 +49,9 @@ public class Main2Activity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancelIntent = new Intent(Main2Activity.this,MainActivity.class);
-                startActivity(cancelIntent);
+                Intent cancelIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED,cancelIntent);
+                finish();
             }
         });
 
