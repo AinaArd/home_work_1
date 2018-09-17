@@ -1,11 +1,8 @@
 package com.example.intenttasks;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button sendButton;
 
     private static final int REQUEST_ID = 1;
+    private static final int EDIT_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, EDIT_REQUEST_CODE);
             }
         });
 
@@ -53,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentSend = new Intent(Intent.ACTION_SEND);
                 intentSend.putExtra(Intent.EXTRA_TEXT, send);
                 intentSend.setType("text/plain");
-                startActivityForResult(intentSend, REQUEST_ID);
+
+                if (intentSend.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intentSend, REQUEST_ID);
+                }
+
             }
         });
 
@@ -61,9 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 0) {
-            if (data != null) {
+        if (requestCode == EDIT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
                 String filledEmail = data.getStringExtra("email");
                 String filledName = data.getStringExtra("name");
                 String filledNumber = data.getStringExtra("number");
@@ -71,10 +72,21 @@ public class MainActivity extends AppCompatActivity {
                 email.setText(filledEmail);
                 name.setText(filledName);
                 phoneNumber.setText(filledNumber);
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == REQUEST_ID) {
+            if (resultCode == RESULT_OK) {
+                String filledEmail = data.getStringExtra("email");
+                String filledName = data.getStringExtra("name");
+                String filledNumber = data.getStringExtra("number");
 
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(this, "You have cancelled", Toast.LENGTH_LONG).show();
+                email.setText(filledEmail);
+                name.setText(filledName);
+                phoneNumber.setText(filledNumber);
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

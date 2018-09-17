@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -33,24 +33,26 @@ public class Main2Activity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
 
 
-
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPost = new Intent();
-                intentPost.putExtra("email", emailEdit.getText().toString());
-                intentPost.putExtra("name", nameEdit.getText().toString());
-                intentPost.putExtra("number", phoneNumberEdit.getText().toString());
-                setResult(RESULT_OK,intentPost);
-                finish();
+                if (emailEdit.getText().toString() != null && nameEdit.getText().toString() != null && phoneNumberEdit.getText().toString() != null) {
+                    Intent intentPost = new Intent();
+                    intentPost.putExtra("email", emailEdit.getText().toString());
+                    intentPost.putExtra("name", nameEdit.getText().toString());
+                    intentPost.putExtra("number", phoneNumberEdit.getText().toString());
+                    setResult(RESULT_OK, intentPost);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Fill in all the gaps", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancelIntent = new Intent();
-                setResult(Activity.RESULT_CANCELED,cancelIntent);
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
